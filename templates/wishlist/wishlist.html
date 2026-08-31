@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="wishlist-page">
+
+    <h1>❤️ My Wishlist</h1>
+
+    {% if items %}
+
+    <div class="wishlist-grid">
+
+        {% for item in items %}
+
+        <div class="wishlist-card">
+
+            <div class="wishlist-image">
+
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+
+            </div>
+
+            <div class="wishlist-info">
+
+                <h2>{{ item.product.name }}</h2>
+
+                <p class="price">₹{{ item.product.price }}</p>
+
+                <div class="wishlist-buttons">
+
+                    <a href="{% url 'add_to_cart' item.product.id %}" class="cart-btn">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Add to Cart
+                    </a>
+
+                    <a href="{% url 'remove_from_wishlist' item.id %}" class="remove-btn">
+                        <i class="fa-solid fa-trash"></i>
+                        Remove
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+
+        <i class="fa-solid fa-heart-crack"></i>
+
+        <h2>Your Wishlist is Empty</h2>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

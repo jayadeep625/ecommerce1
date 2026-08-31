@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="padding:40px 5%;">
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:30px;
+    ">
+
+        <h1 style="color:#00ffff;">
+            📦 Product Management
+        </h1>
+
+        <a
+            href="{% url 'add_product' %}"
+            class="btn"
+        >
+            ➕ Add Product
+        </a>
+
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div style="
+                padding:15px;
+                margin-bottom:20px;
+                border-radius:10px;
+                background:rgba(0,255,255,.12);
+                color:#00ffff;
+            ">
+
+                {{ message }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div style="
+        display:grid;
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(260px,1fr)
+            );
+        gap:25px;
+    ">
+
+
+        {% for product in products %}
+
+        <div style="
+            background:rgba(255,255,255,.10);
+            border:1px solid rgba(255,255,255,.15);
+            border-radius:20px;
+            padding:20px;
+            backdrop-filter:blur(20px);
+        ">
+
+
+            {% if product.image %}
+
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                    style="
+                        width:100%;
+                        height:220px;
+                        object-fit:contain;
+                        border-radius:15px;
+                    "
+                >
+
+            {% endif %}
+
+
+            <h2 style="
+                margin-top:15px;
+                color:white;
+            ">
+
+                {{ product.name }}
+
+            </h2>
+
+
+            <p style="color:#00ffff;">
+                ₹{{ product.price }}
+            </p>
+
+
+            <p style="color:#c8d4e8;">
+
+                Stock:
+                {{ product.stock }}
+
+            </p>
+
+
+            <div style="
+                display:flex;
+                gap:10px;
+                margin-top:15px;
+            ">
+
+                <a
+                    href="{% url 'edit_product' product.id %}"
+                    class="btn"
+                >
+                    ✏️ Edit
+                </a>
+
+                <a
+                    href="{% url 'delete_product' product.id %}"
+                    class="btn"
+                    style="
+                        background:#dc2626;
+                    "
+                >
+                    🗑️ Delete
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+            <p>
+                No products available.
+            </p>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
+{% endblock %}

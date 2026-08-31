@@ -1,0 +1,443 @@
+:root{
+    --primary:#1e3c72;
+    --secondary:#2a5298;
+    --cyan:#00c6ff;
+    --orange:#ff9800;
+    --orange-dark:#ff5722;
+    --white:#ffffff;
+    --glass:rgba(255,255,255,.12);
+    --glass-border:rgba(255,255,255,.25);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:linear-gradient(
+        135deg,
+        #0b1830,
+        #1e3c72,
+        #2a5298
+    );
+
+    overflow-x:hidden;
+
+}
+
+/* ============================
+        Register Page
+============================= */
+
+.register-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+    perspective:1200px;
+
+}
+
+/* ============================
+        Card
+============================= */
+
+.register-card{
+
+    width:430px;
+
+    background:var(--glass);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid var(--glass-border);
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.35);
+
+    transition:.4s;
+
+    transform-style:preserve-3d;
+
+}
+
+.register-card:hover{
+
+    transform:
+    rotateX(5deg)
+    rotateY(-5deg)
+    translateY(-10px);
+
+    box-shadow:
+    0 40px 60px rgba(0,0,0,.45);
+
+}
+
+/* ============================
+        Header
+============================= */
+
+.card-header{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.eyebrow{
+
+    color:#FFD54F;
+
+    letter-spacing:2px;
+
+    font-size:12px;
+
+    margin-bottom:15px;
+
+    text-transform:uppercase;
+
+}
+
+.logo-circle{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:38px;
+
+    background:linear-gradient(
+        45deg,
+        var(--orange),
+        var(--orange-dark)
+    );
+
+    color:white;
+
+    box-shadow:
+    0 15px 30px rgba(255,87,34,.4);
+
+    margin-bottom:20px;
+
+}
+
+.card-header h1{
+
+    color:white;
+
+    margin-bottom:10px;
+
+    font-size:32px;
+
+}
+
+.card-header p{
+
+    color:#ddd;
+
+}
+
+/* ============================
+        Form
+============================= */
+
+.field-group{
+
+    margin-bottom:20px;
+
+}
+
+.field-group label{
+
+    display:block;
+
+    color:white;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.input-wrap{
+
+    position:relative;
+
+}
+
+/* Django Form Fields */
+
+.form-control,
+input{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:none;
+
+    outline:none;
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+input::placeholder{
+
+    color:#ddd;
+
+}
+
+input:focus{
+
+    background:white;
+
+    color:black;
+
+    transform:scale(1.03);
+
+    box-shadow:
+    0 0 20px rgba(255,255,255,.4);
+
+}
+
+/* ============================
+        Errors
+============================= */
+
+.errorlist{
+
+    list-style:none;
+
+    margin-top:8px;
+
+    color:#ffb3b3;
+
+    font-size:13px;
+
+}
+
+/* ============================
+        Button
+============================= */
+
+.btn-register{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(
+        45deg,
+        var(--orange),
+        var(--orange-dark)
+    );
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    margin-top:10px;
+
+    box-shadow:
+    0 15px 30px rgba(255,87,34,.35);
+
+}
+
+.btn-register:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 25px 40px rgba(255,87,34,.5);
+
+}
+
+/* ============================
+        Divider
+============================= */
+
+.divider{
+
+    position:relative;
+
+    text-align:center;
+
+    margin:30px 0;
+
+    color:white;
+
+}
+
+.divider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:40%;
+
+    height:1px;
+
+    background:white;
+
+    left:0;
+
+    top:50%;
+
+}
+
+.divider::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:40%;
+
+    height:1px;
+
+    background:white;
+
+    right:0;
+
+    top:50%;
+
+}
+
+/* ============================
+        Login Link
+============================= */
+
+.login-link{
+
+    text-align:center;
+
+    color:white;
+
+}
+
+.login-link a{
+
+    color:#FFD54F;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+.login-link a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ============================
+        Responsive
+============================= */
+
+@media(max-width:600px){
+
+.register-card{
+
+    width:100%;
+
+    padding:25px;
+
+}
+
+.card-header h1{
+
+    font-size:28px;
+
+}
+
+}
+.toggle-eye{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.strength-meter{
+
+    width:100%;
+
+    height:7px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    margin-top:10px;
+
+    overflow:hidden;
+
+}
+
+.strength-bar{
+
+    width:0;
+
+    height:100%;
+
+    transition:.4s;
+
+}

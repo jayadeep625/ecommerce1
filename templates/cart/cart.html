@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="cart-container">
+
+    <div class="cart-left">
+
+        <h1>🛒 My Shopping Cart</h1>
+
+        {% for item in cart_items %}
+
+        <div class="cart-card">
+
+            <div class="image-box">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            </div>
+
+            <div class="details">
+
+                <h2>{{ item.product.name }}</h2>
+
+                <p>{{ item.product.description|truncatewords:20 }}</p>
+
+                <div class="price">
+                    ₹{{ item.product.price }}
+                </div>
+
+                 <div class="quantity">
+
+    <a href="{% url 'decrease_quantity' item.id %}" class="qty-btn">
+        −
+    </a>
+
+    <span class="qty-number">
+        {{ item.quantity }}
+    </span>
+
+    <a href="{% url 'increase_quantity' item.id %}" class="qty-btn">
+        +
+    </a>
+
+</div>
+                 <a href="{% url 'remove_from_cart' item.id %}" class="remove-btn">
+    🗑 Remove
+</a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-cart">
+
+            <h2>Your Cart is Empty</h2>
+
+            <a href="{% url 'products' %}" class="shop-btn">
+                Continue Shopping
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="cart-right">
+
+        <div class="summary-card">
+
+            <h2>Order Summary</h2>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>₹{{ total }}</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>FREE</span>
+            </div>
+
+            <hr>
+
+            <div class="summary-row total">
+                <strong>Total</strong>
+                <strong>₹{{ total }}</strong>
+            </div>
+
+             <a href="{% url 'checkout' %}" class="checkout-btn">
+    Proceed to Checkout
+</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

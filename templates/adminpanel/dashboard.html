@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+
+<style>
+
+.admin-page {
+    padding: 40px 5%;
+}
+
+.admin-header {
+    margin-bottom: 35px;
+}
+
+.admin-header h1 {
+    color: #00ffff;
+    font-size: 40px;
+}
+
+.admin-header p {
+    color: #c8d4e8;
+}
+
+
+/* CARDS */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px, 1fr)
+        );
+
+    gap: 25px;
+
+    margin-bottom: 40px;
+}
+
+
+.stat-card {
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    backdrop-filter: blur(20px);
+
+    transition: .3s;
+}
+
+
+.stat-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,255,255,.15);
+}
+
+
+.stat-card h3 {
+    color: #c8d4e8;
+
+    margin-bottom: 10px;
+}
+
+
+.stat-card h2 {
+    color: #00ffff;
+
+    font-size: 32px;
+}
+
+
+/* NAVIGATION */
+
+.admin-menu {
+
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 40px;
+}
+
+
+.admin-menu a {
+
+    padding: 13px 22px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+/* RECENT ORDERS */
+
+.recent-orders {
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    backdrop-filter: blur(20px);
+}
+
+
+.recent-orders h2 {
+
+    color: #00ffff;
+
+    margin-bottom: 20px;
+}
+
+
+.order-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr 1fr;
+
+    padding: 15px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+
+.order-row span {
+
+    color: #dbeafe;
+}
+
+
+@media(max-width:700px) {
+
+    .order-row {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 10px;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-page">
+
+
+    <div class="admin-header">
+
+        <h1>
+            ⚡ Admin Dashboard
+        </h1>
+
+        <p>
+            Manage your E-Commerce store
+        </p>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="admin-menu">
+
+        <a href="{% url 'admin_dashboard' %}">
+            📊 Dashboard
+        </a>
+
+        <a href="{% url 'admin_products' %}">
+            📦 Products
+        </a>
+
+        <a href="{% url 'admin_orders' %}">
+            🛒 Orders
+        </a>
+
+        <a href="{% url 'admin_users' %}">
+            👥 Users
+        </a>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Products
+            </h3>
+
+            <h2>
+                {{ total_products }}
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Orders
+            </h3>
+
+            <h2>
+                {{ total_orders }}
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Users
+            </h3>
+
+            <h2>
+                {{ total_users }}
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Revenue
+            </h3>
+
+            <h2>
+                ₹{{ revenue }}
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECENT ORDERS -->
+
+    <div class="recent-orders">
+
+        <h2>
+            📋 Recent Orders
+        </h2>
+
+
+        <div class="order-row">
+
+            <strong>
+                Order
+            </strong>
+
+            <strong>
+                Customer
+            </strong>
+
+            <strong>
+                Amount
+            </strong>
+
+            <strong>
+                Status
+            </strong>
+
+        </div>
+
+
+        {% for order in recent_orders %}
+
+        <div class="order-row">
+
+            <span>
+                #{{ order.id }}
+            </span>
+
+            <span>
+                {{ order.user.username }}
+            </span>
+
+            <span>
+                ₹{{ order.total_amount }}
+            </span>
+
+            <span>
+                {{ order.status }}
+            </span>
+
+        </div>
+
+        {% empty %}
+
+        <p>
+            No orders yet.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

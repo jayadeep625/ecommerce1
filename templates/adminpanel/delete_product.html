@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="
+    max-width:600px;
+    margin:100px auto;
+    padding:40px;
+    text-align:center;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:20px;
+">
+
+    <h1 style="color:#ff5555;">
+        🗑️ Delete Product
+    </h1>
+
+
+    <p style="
+        color:#dbeafe;
+        margin:25px 0;
+    ">
+
+        Are you sure you want to delete:
+
+        <strong>
+            {{ product.name }}
+        </strong>?
+
+    </p>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            style="
+                padding:14px 25px;
+                border:none;
+                border-radius:10px;
+                background:#dc2626;
+                color:white;
+                font-weight:bold;
+                cursor:pointer;
+            "
+        >
+
+            Yes, Delete
+
+        </button>
+
+
+        <a
+            href="{% url 'admin_products' %}"
+            class="btn"
+        >
+
+            Cancel
+
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

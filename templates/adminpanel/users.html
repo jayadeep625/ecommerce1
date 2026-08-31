@@ -1,0 +1,570 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+
+<style>
+
+.users-page {
+    padding: 45px 5%;
+}
+
+.users-header {
+    margin-bottom: 35px;
+}
+
+.users-header h1 {
+    font-size: 42px;
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ffff,
+            #38bdf8,
+            #818cf8
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.users-header p {
+    color: #b8c7df;
+}
+
+
+/* USER GRID */
+
+.users-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(330px, 1fr)
+        );
+
+    gap: 25px;
+}
+
+
+/* USER CARD */
+
+.user-card {
+
+    padding: 28px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.14),
+            rgba(255,255,255,.05)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    backdrop-filter: blur(25px);
+
+    box-shadow:
+        0 20px 45px
+        rgba(0,0,0,.30);
+
+    transition: .35s;
+}
+
+.user-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 30px 60px
+        rgba(0,0,0,.40),
+
+        0 0 25px
+        rgba(0,255,255,.08);
+}
+
+
+/* TOP */
+
+.user-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.user-avatar {
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.30);
+}
+
+
+.user-name {
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: white;
+}
+
+
+.user-email {
+
+    color: #9fb3ce;
+
+    font-size: 13px;
+
+    margin-top: 3px;
+}
+
+
+/* DETAILS */
+
+.user-details {
+
+    display: grid;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+
+.user-detail {
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(0,0,0,.18);
+}
+
+
+.detail-label {
+
+    display: block;
+
+    color: #8499b6;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 4px;
+}
+
+
+.detail-value {
+
+    color: white;
+
+    font-weight: 600;
+}
+
+
+/* STATUS */
+
+.user-status {
+
+    display: inline-flex;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    margin-bottom: 18px;
+}
+
+
+.active {
+
+    color: #4ade80;
+
+    background:
+        rgba(74,222,128,.10);
+
+    border:
+        1px solid
+        rgba(74,222,128,.20);
+}
+
+
+.inactive {
+
+    color: #f87171;
+
+    background:
+        rgba(248,113,113,.10);
+
+    border:
+        1px solid
+        rgba(248,113,113,.20);
+}
+
+
+/* ADMIN BADGE */
+
+.admin-badge {
+
+    color: #fbbf24;
+
+    background:
+        rgba(251,191,36,.10);
+
+    border:
+        1px solid
+        rgba(251,191,36,.20);
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    margin-left: 5px;
+}
+
+
+/* BUTTONS */
+
+.user-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+.user-btn {
+
+    padding: 11px 16px;
+
+    border-radius: 11px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: .3s;
+}
+
+
+.activate-btn {
+
+    background:
+        rgba(74,222,128,.12);
+
+    color: #4ade80;
+
+    border:
+        1px solid
+        rgba(74,222,128,.25);
+}
+
+
+.deactivate-btn {
+
+    background:
+        rgba(251,191,36,.10);
+
+    color: #fbbf24;
+
+    border:
+        1px solid
+        rgba(251,191,36,.25);
+}
+
+
+.delete-btn {
+
+    background:
+        rgba(248,113,113,.10);
+
+    color: #f87171;
+
+    border:
+        1px solid
+        rgba(248,113,113,.25);
+}
+
+
+.user-btn:hover {
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:600px) {
+
+    .users-page {
+        padding: 30px 15px;
+    }
+
+    .users-header h1 {
+        font-size: 32px;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="users-page">
+
+
+    <div class="users-header">
+
+        <h1>
+            👥 User Management
+        </h1>
+
+        <p>
+            Manage customers and administrator accounts
+        </p>
+
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div style="
+                padding:15px 20px;
+                margin-bottom:20px;
+                border-radius:12px;
+                background:rgba(0,255,255,.10);
+                color:#00ffff;
+            ">
+
+                {{ message }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="users-grid">
+
+
+        {% for user in users %}
+
+
+        <div class="user-card">
+
+
+            <div class="user-top">
+
+                <div class="user-avatar">
+
+                    {{ user.username|first|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <div class="user-name">
+
+                        {{ user.username }}
+
+                        {% if user.is_staff %}
+
+                            <span class="admin-badge">
+                                ADMIN
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="user-email">
+
+                        {{ user.email|default:"No email" }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-details">
+
+
+                <div class="user-detail">
+
+                    <span class="detail-label">
+                        User ID
+                    </span>
+
+                    <span class="detail-value">
+                        #{{ user.id }}
+                    </span>
+
+                </div>
+
+
+                <div class="user-detail">
+
+                    <span class="detail-label">
+                        Joined
+                    </span>
+
+                    <span class="detail-value">
+
+                        {{ user.date_joined|date:"d M Y" }}
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            {% if user.is_active %}
+
+                <div class="user-status active">
+
+                    ● Active
+
+                </div>
+
+            {% else %}
+
+                <div class="user-status inactive">
+
+                    ● Inactive
+
+                </div>
+
+            {% endif %}
+
+
+            <div class="user-actions">
+
+
+                {% if user.is_active %}
+
+                    {% if user != request.user %}
+
+                        <a
+                            href="{% url 'deactivate_user' user.id %}"
+                            class="user-btn deactivate-btn"
+                        >
+                            🔒 Disable
+                        </a>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <a
+                        href="{% url 'activate_user' user.id %}"
+                        class="user-btn activate-btn"
+                    >
+                        🔓 Activate
+                    </a>
+
+                {% endif %}
+
+
+                {% if user != request.user %}
+
+                    <a
+                        href="{% url 'delete_user' user.id %}"
+                        class="user-btn delete-btn"
+                    >
+                        🗑️ Delete
+                    </a>
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+
+        {% empty %}
+
+
+        <div style="
+            text-align:center;
+            padding:80px;
+            color:#9fb3ce;
+        ">
+
+            <h2>
+                👥 No Users Found
+            </h2>
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
+{% endblock %}

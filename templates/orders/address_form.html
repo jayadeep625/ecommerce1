@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/address.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<section class="address-page">
+
+    <div class="glass-card">
+
+        <div class="left-panel">
+
+            <div class="title">
+
+                <h1>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Delivery Address
+                </h1>
+
+                <p>
+                    Enter your delivery details to continue your purchase.
+                </p>
+
+            </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="input-box">
+                    <i class="fa-solid fa-user"></i>
+                    {{ form.full_name }}
+                </div>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-phone"></i>
+                    {{ form.phone }}
+                </div>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-envelope"></i>
+                    {{ form.email }}
+                </div>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-house"></i>
+                    {{ form.house }}
+                </div>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-road"></i>
+                    {{ form.street }}
+                </div>
+
+                <div class="row">
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-city"></i>
+                        {{ form.city }}
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        {{ form.state }}
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                    {{ form.pincode }}
+                </div>
+
+                <button class="save-btn" type="submit">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Address
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="right-panel">
+
+            <div class="preview-card">
+
+                <h2>
+                    <i class="fa-solid fa-eye"></i>
+                    Live Preview
+                </h2>
+
+                <div class="preview-content">
+
+                    <h3 id="preview-name">
+                        Your Name
+                    </h3>
+
+                    <p id="preview-phone">
+                        Phone Number
+                    </p>
+
+                    <p id="preview-email">
+                        Email Address
+                    </p>
+
+                    <hr>
+
+                    <p id="preview-house">
+                        House / Flat
+                    </p>
+
+                    <p id="preview-street">
+                        Street
+                    </p>
+
+                    <p id="preview-city">
+                        City
+                    </p>
+
+                    <p id="preview-state">
+                        State
+                    </p>
+
+                    <p id="preview-pin">
+                        Pincode
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="security-card">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <h3>Secure Checkout</h3>
+
+                <p>
+
+                    Your delivery information is securely stored
+                    and protected.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script src="{% static 'js/address.js' %}"></script>
+
+{% endblock %}

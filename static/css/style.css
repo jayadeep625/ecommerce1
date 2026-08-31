@@ -1,0 +1,737 @@
+/* ==========================
+   Google Font
+========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:linear-gradient(135deg,#081229,#10234d,#1d4ed8);
+
+    color:white;
+
+    min-height:100vh;
+
+}
+
+/* ==========================
+   NAVBAR
+========================== */
+
+.navbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 60px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+}
+
+/* ==========================
+LOGO
+========================== */
+
+.logo a{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:700;
+
+}
+
+.logo{
+
+    transition:.4s;
+
+}
+
+.logo:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================
+SEARCH
+========================== */
+
+.search-box{
+
+    display:flex;
+
+    align-items:center;
+
+    width:420px;
+
+    background:white;
+
+    border-radius:40px;
+
+    overflow:hidden;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    padding:14px 18px;
+
+    font-size:15px;
+
+}
+
+.search-box button{
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:14px 22px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.search-box button:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* ==========================
+MENU
+========================== */
+
+.nav-links{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+    list-style:none;
+
+}
+
+.nav-links li{
+
+    position:relative;
+
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:#38bdf8;
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================
+PROFILE DROPDOWN
+========================== */
+
+.profile-menu{
+
+    position:relative;
+
+}
+
+.dropdown{
+
+    position:absolute;
+
+    right:0;
+
+    top:60px;
+
+    width:240px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:18px;
+
+    padding:10px;
+
+    display:none;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.3);
+
+}
+
+.profile-menu.active .dropdown{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+
+.dropdown a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+}
+
+.dropdown a:hover{
+
+    background:rgba(255,255,255,.15);
+
+    color:#38bdf8;
+
+}
+
+@keyframes dropdown{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================
+MAIN
+========================== */
+
+main{
+
+    width:95%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:35px 0;
+
+}
+
+/* ==========================
+BUTTON
+========================== */
+
+.btn{
+
+    display:inline-block;
+
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+
+    color:white;
+
+    padding:14px 28px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:1100px){
+
+.navbar{
+
+flex-wrap:wrap;
+
+gap:20px;
+
+padding:20px;
+
+}
+
+.search-box{
+
+width:100%;
+
+}
+
+.nav-links{
+
+width:100%;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.logo a{
+
+font-size:22px;
+
+}
+
+.search-box{
+
+width:100%;
+
+}
+
+.nav-links{
+
+gap:15px;
+
+font-size:14px;
+
+}
+
+.dropdown{
+
+right:-40px;
+
+}
+
+}
+
+@media(max-width:550px){
+
+.nav-links{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+}
+
+/* ==========================
+   PROFILE DROPDOWN
+========================== */
+
+
+.dropdown{
+
+    position: absolute;
+
+    top: 100%;
+
+    right: 0;
+
+    margin-top: 8px;
+
+    width: 250px;
+
+    background: rgba(8,18,41,.98);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    border-radius: 15px;
+
+    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(10px);
+
+    transition: .3s ease;
+
+    z-index: 9999;
+}
+
+.profile-menu.active .dropdown{
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+
+
+.dropdown a:hover{
+
+    background: rgba(255,255,255,.08);
+
+    color: #00ffff;
+
+}
+
+.dropdown hr{
+
+    border: none;
+
+    border-top: 1px solid rgba(255,255,255,.12);
+
+}
+
+/* ==============================
+   PROFILE MENU
+============================== */
+
+.profile-menu {
+    position: relative;
+}
+
+/* Profile button */
+
+.profile-menu > a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: white;
+    text-decoration: none;
+
+    padding: 10px 12px;
+
+    cursor: pointer;
+}
+
+/* Dropdown */
+
+
+
+/* OPEN */
+
+.profile-menu.active .dropdown {
+    display: block;
+}
+
+/* Dropdown links */
+
+.profile-menu .dropdown a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    transition: 0.25s ease;
+}
+
+
+.profile-menu .dropdown a i {
+
+    width: 20px;
+
+    color: #00ffff;
+}
+
+/* Divider */
+
+/* =========================================================
+   NOTIFICATION OVERRIDE
+   Keep notification independent from profile dropdown
+========================================================= */
+
+.notification-wrapper {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 48px !important;
+    height: 48px !important;
+
+    margin: 0 8px !important;
+
+    z-index: 100000 !important;
+}
+
+/* Bell */
+
+.notification-wrapper .notification-bell {
+    position: relative !important;
+
+    width: 48px !important;
+    height: 48px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border: none !important;
+    background: transparent !important;
+
+    color: white !important;
+
+    cursor: pointer !important;
+
+    font-size: 26px !important;
+
+    z-index: 100001 !important;
+}
+
+/* Badge */
+
+.notification-wrapper .notification-badge {
+    position: absolute !important;
+
+    top: 1px !important;
+    right: 0 !important;
+
+    min-width: 19px !important;
+    height: 19px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 5px !important;
+
+    background: #ef4444 !important;
+    color: white !important;
+
+    border-radius: 50% !important;
+
+    border: 2px solid #10234d !important;
+
+    font-size: 10px !important;
+    font-weight: 700 !important;
+
+    z-index: 100002 !important;
+}
+
+/* Notification panel */
+
+.notification-wrapper .notification-dropdown {
+    position: fixed !important;
+
+    top: 82px !important;
+    right: 25px !important;
+
+    left: auto !important;
+
+    width: 380px !important;
+    max-width: calc(100vw - 50px) !important;
+
+    height: auto !important;
+    max-height: 500px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: none !important;
+
+    background: #ffffff !important;
+    color: #222222 !important;
+
+    border: 1px solid #ddd !important;
+    border-radius: 14px !important;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.35) !important;
+
+    overflow: hidden !important;
+
+    z-index: 9999999 !important;
+}
+
+/*
+   IMPORTANT:
+   Your JavaScript uses style.display = "none"/"block".
+   Therefore don't use visibility:hidden here.
+*/
+
+.notification-wrapper .notification-dropdown[style*="display: none"] {
+    display: none !important;
+}
+
+.notification-wrapper .notification-dropdown[style*="display: block"] {
+    display: block !important;
+}
+
+
+/* Notification header */
+
+.notification-wrapper .notification-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    width: 100% !important;
+
+    padding: 15px !important;
+
+    background: white !important;
+
+    color: #222 !important;
+
+    border-bottom: 1px solid #ddd !important;
+}
+
+
+/* Notification list */
+
+.notification-wrapper .notification-list {
+    width: 100% !important;
+
+    max-height: 420px !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+
+/* Notification item */
+
+.notification-wrapper .notification-item {
+    width: 100% !important;
+
+    padding: 14px 16px !important;
+
+    margin: 0 !important;
+
+    background: white !important;
+
+    color: #222 !important;
+
+    border-bottom: 1px solid #eee !important;
+}
+
+
+/* Notification title */
+
+.notification-wrapper .notification-title {
+    display: block !important;
+
+    color: #222 !important;
+
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+
+
+/* Notification message */
+
+.notification-wrapper .notification-message {
+    display: block !important;
+
+    color: #555 !important;
+
+    font-size: 13px !important;
+
+    line-height: 1.5 !important;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .notification-wrapper .notification-dropdown {
+        top: 70px !important;
+
+        left: 10px !important;
+        right: 10px !important;
+
+        width: auto !important;
+        max-width: none !important;
+    }
+
+}

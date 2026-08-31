@@ -1,0 +1,359 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="checkout-page">
+
+    <!-- ==============================
+         CHECKOUT TITLE
+    =============================== -->
+
+    <div class="checkout-title">
+
+        <span>SECURE SHOPPING</span>
+
+        <h1>✨ Secure Checkout</h1>
+
+        <p>
+            Complete your purchase safely and securely.
+        </p>
+
+    </div>
+
+
+    <div class="checkout-grid">
+
+
+        <!-- ==============================
+             DELIVERY ADDRESS
+        =============================== -->
+
+        <div class="glass-card address-section">
+
+            <div class="section-heading">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <div>
+                    <h2>Delivery Address</h2>
+
+                    <p>
+                        Select where you want your order delivered.
+                    </p>
+                </div>
+
+            </div>
+
+
+            {% if addresses %}
+
+                {% for address in addresses %}
+
+                <div class="address-card
+                    {% if selected_address == address.id %}
+                        selected
+                    {% endif %}
+                ">
+
+                    <div class="address-top">
+
+                        <h3>
+                            {{ address.full_name }}
+                        </h3>
+
+                        {% if selected_address == address.id %}
+
+                            <span class="selected-badge">
+                                ✓ Selected
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="address-details">
+
+                        <p>
+                            <i class="fa-solid fa-house"></i>
+                            {{ address.house }},
+                            {{ address.street }}
+                        </p>
+
+                        <p>
+                            <i class="fa-solid fa-city"></i>
+                            {{ address.city }},
+                            {{ address.state }}
+                        </p>
+
+                        <p>
+                            <i class="fa-solid fa-location-dot"></i>
+                            {{ address.pincode }}
+                        </p>
+
+                        <p>
+                            <i class="fa-solid fa-phone"></i>
+                            {{ address.phone }}
+                        </p>
+
+                        {% if address.email %}
+
+                        <p>
+                            <i class="fa-solid fa-envelope"></i>
+                            {{ address.email }}
+                        </p>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    {% if selected_address == address.id %}
+
+                        <button class="deliver-btn selected-btn"
+                                type="button"
+                                disabled>
+
+                            <i class="fa-solid fa-check"></i>
+
+                            Deliver Here
+
+                        </button>
+
+                    {% else %}
+
+                        <a href="{% url 'select_address' address.id %}"
+                           class="deliver-btn">
+
+                            <i class="fa-solid fa-location-arrow"></i>
+
+                            Deliver Here
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+
+            {% else %}
+
+                <div class="no-address">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <h3>No Address Added</h3>
+
+                    <p>
+                        Add a delivery address to continue.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ADD ADDRESS -->
+
+            <a href="{% url 'add_address' %}"
+               class="continue-btn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add New Address
+
+            </a>
+
+        </div>
+
+
+
+        <!-- ==============================
+             ORDER SUMMARY
+        =============================== -->
+
+        <div class="glass-card summary">
+
+            <div class="section-heading">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <div>
+
+                    <h2>Order Summary</h2>
+
+                    <p>
+                        Review your items before payment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CART ITEMS -->
+
+            <div class="checkout-products">
+
+                {% for item in cart_items %}
+
+                <div class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="{{ item.product.image.url }}"
+                            alt="{{ item.product.name }}"
+                        >
+
+                    </div>
+
+
+                    <div class="product-details">
+
+                        <h4>
+                            {{ item.product.name }}
+                        </h4>
+
+                        <p>
+                            Quantity:
+                            <strong>{{ item.quantity }}</strong>
+                        </p>
+
+                        <strong class="product-price">
+
+                            ₹{{ item.product.price }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                <div class="empty-cart">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <p>Your cart is empty.</p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <hr>
+
+
+            <!-- PRICE DETAILS -->
+
+            <div class="summary-item">
+
+                <span>Subtotal</span>
+
+                <span>
+                    ₹{{ subtotal }}
+                </span>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>Shipping</span>
+
+                <span class="free">
+                    FREE
+                </span>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>Discount</span>
+
+                <span>
+                    ₹{{ discount }}
+                </span>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="summary-total">
+
+                <span>Total</span>
+
+                <span>
+                    ₹{{ total }}
+                </span>
+
+            </div>
+
+
+            <!-- PAYMENT BUTTON -->
+
+            {% if selected_address %}
+
+                <a href="{% url 'payment' %}"
+                   class="pay-btn">
+
+                    <span>
+                        Proceed to Payment
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            {% else %}
+
+                <button class="pay-btn disabled-btn"
+                        type="button"
+                        onclick="alert('Please select a delivery address first.')">
+
+                    <span>
+                        Select Address to Continue
+                    </span>
+
+                    <i class="fa-solid fa-lock"></i>
+
+                </button>
+
+            {% endif %}
+
+
+            <div class="secure-payment">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Your payment information is secure.
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

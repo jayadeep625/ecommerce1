@@ -1,0 +1,572 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+<style>
+
+/* =====================================
+   PAYMENT PAGE
+===================================== */
+
+.payment-page {
+
+    min-height: 75vh;
+
+    padding: 60px 5%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172554,
+            #1e3a8a,
+            #2563eb
+        );
+
+}
+
+
+/* =====================================
+   TITLE
+===================================== */
+
+.payment-title {
+
+    text-align: center;
+
+    margin-bottom: 45px;
+
+}
+
+.payment-title h1 {
+
+    color: white;
+
+    font-size: 42px;
+
+    margin-bottom: 10px;
+
+}
+
+.payment-title p {
+
+    color: #dbeafe;
+
+    font-size: 18px;
+
+}
+
+
+/* =====================================
+   TOTAL
+===================================== */
+
+.payment-total {
+
+    max-width: 1000px;
+
+    margin: 0 auto 35px;
+
+    padding: 20px 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: rgba(255,255,255,.10);
+
+    border: 1px solid rgba(255,255,255,.20);
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(15px);
+
+}
+
+.payment-total span:first-child {
+
+    font-size: 20px;
+
+    color: #dbeafe;
+
+}
+
+.payment-total span:last-child {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: #00ffff;
+
+}
+
+
+/* =====================================
+   PAYMENT OPTIONS
+===================================== */
+
+.payment-options {
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+}
+
+
+/* =====================================
+   PAYMENT CARD
+===================================== */
+
+.payment-option {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 35px 40px;
+
+    min-height: 170px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.14),
+            rgba(255,255,255,.08)
+        );
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    backdrop-filter: blur(20px);
+
+    cursor: pointer;
+
+    transition: .35s;
+
+}
+
+
+/* Hover */
+
+.payment-option:hover {
+
+    transform: translateY(-5px);
+
+    border-color: #00ffff;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.25);
+
+}
+
+
+/* =====================================
+   RADIO
+===================================== */
+
+.payment-option input {
+
+    width: 25px;
+
+    height: 25px;
+
+    accent-color: #087cff;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =====================================
+   ICON
+===================================== */
+
+.payment-icon {
+
+    width: 120px;
+
+    height: 120px;
+
+    min-width: 120px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: #2864e8;
+
+    color: white;
+
+    font-size: 55px;
+
+}
+
+
+/* =====================================
+   PAYMENT DETAILS
+===================================== */
+
+.payment-details {
+
+    flex: 1;
+
+}
+
+.payment-details h2 {
+
+    color: white;
+
+    font-size: 32px;
+
+    margin-bottom: 5px;
+
+}
+
+.payment-details p {
+
+    color: #d0d9ef;
+
+    font-size: 20px;
+
+    margin: 0;
+
+}
+
+
+/* =====================================
+   CONTINUE BUTTON
+===================================== */
+
+.payment-button-container {
+
+    max-width: 1000px;
+
+    margin: 40px auto 0;
+
+}
+
+.continue-btn {
+
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #2563eb
+        );
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.continue-btn:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.3);
+
+}
+
+
+/* =====================================
+   RAZORPAY BADGE
+===================================== */
+
+.razorpay-info {
+
+    max-width: 1000px;
+
+    margin: 25px auto 0;
+
+    text-align: center;
+
+    color: #dbeafe;
+
+    font-size: 14px;
+
+}
+
+.razorpay-info i {
+
+    color: #00ffff;
+
+    margin-right: 6px;
+
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:768px) {
+
+    .payment-option {
+
+        padding: 25px;
+
+        gap: 18px;
+
+    }
+
+    .payment-icon {
+
+        width: 80px;
+
+        height: 80px;
+
+        min-width: 80px;
+
+        font-size: 35px;
+
+    }
+
+    .payment-details h2 {
+
+        font-size: 23px;
+
+    }
+
+    .payment-details p {
+
+        font-size: 15px;
+
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="payment-page">
+
+
+    <!-- =====================================
+         TITLE
+    ====================================== -->
+
+    <div class="payment-title">
+
+        <h1>
+            💳 Choose Payment Method
+        </h1>
+
+        <p>
+            Select your preferred payment method
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         TOTAL
+    ====================================== -->
+
+    <div class="payment-total">
+
+        <span>
+            Order Total
+        </span>
+
+        <span>
+            ₹{{ total }}
+        </span>
+
+    </div>
+
+
+    <!-- =====================================
+         PAYMENT FORM
+    ====================================== -->
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <div class="payment-options">
+
+
+            <!-- =================================
+                 CASH ON DELIVERY
+            ================================== -->
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="COD"
+                    checked
+                >
+
+
+                <div class="payment-icon">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                </div>
+
+
+                <div class="payment-details">
+
+                    <h2>
+                        Cash on Delivery
+                    </h2>
+
+                    <p>
+                        Pay after your order arrives.
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <!-- =================================
+                 UPI
+            ================================== -->
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="Razorpay"
+                >
+
+
+                <div class="payment-icon">
+
+                    <i class="fa-brands fa-google-pay"></i>
+
+                </div>
+
+
+                <div class="payment-details">
+
+                    <h2>
+                        UPI
+                    </h2>
+
+                    <p>
+                        Google Pay • PhonePe • Paytm
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <!-- =================================
+                 CARD
+            ================================== -->
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="Razorpay"
+                >
+
+
+                <div class="payment-icon">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                </div>
+
+
+                <div class="payment-details">
+
+                    <h2>
+                        Credit / Debit Card
+                    </h2>
+
+                    <p>
+                        Visa • MasterCard • RuPay
+                    </p>
+
+                </div>
+
+            </label>
+
+        </div>
+
+
+        <!-- =====================================
+             BUTTON
+        ====================================== -->
+
+        <div class="payment-button-container">
+
+            <button
+                type="submit"
+                class="continue-btn">
+
+                Continue to Payment →
+
+            </button>
+
+        </div>
+
+    </form>
+
+
+    <div class="razorpay-info">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        UPI and Card payments are securely processed
+        through Razorpay.
+
+    </div>
+
+
+</section>
+
+{% endblock %}

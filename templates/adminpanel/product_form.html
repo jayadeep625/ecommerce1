@@ -1,0 +1,707 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+
+<style>
+
+/* =========================================
+   PAGE
+========================================= */
+
+.product-page {
+    min-height: 85vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px 25px;
+
+    perspective: 1200px;
+}
+
+
+/* =========================================
+   MAIN 3D CARD
+========================================= */
+
+.product-form-card {
+
+    width: 100%;
+    max-width: 1100px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 45px;
+
+    padding: 45px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.16),
+            rgba(255,255,255,.05)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    backdrop-filter: blur(25px);
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.45),
+        inset 0 1px 1px rgba(255,255,255,.25);
+
+    transform-style: preserve-3d;
+
+    animation: cardEnter .8s ease;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes cardEnter {
+
+    from {
+        opacity: 0;
+        transform:
+            rotateX(10deg)
+            translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            rotateX(0)
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   LEFT SIDE
+========================================= */
+
+.product-form-left {
+
+    transform: translateZ(30px);
+}
+
+
+.product-title {
+
+    font-size: 46px;
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00ffff,
+            #38bdf8,
+            #60a5fa
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color:
+        transparent;
+
+}
+
+
+.product-subtitle {
+
+    color: #b8c7df;
+
+    font-size: 15px;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.product-form p {
+
+    margin-bottom: 20px;
+
+    position: relative;
+}
+
+
+.product-form label {
+
+    display: block;
+
+    color: #dbeafe;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+
+    width: 100%;
+
+    padding: 15px 18px;
+
+    border: 1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 13px;
+
+    outline: none;
+
+    background:
+        rgba(5,15,35,.65);
+
+    color: white;
+
+    font-size: 15px;
+
+    transition:
+        .3s;
+
+    box-shadow:
+        inset 0 3px 8px
+        rgba(0,0,0,.25),
+
+        0 5px 15px
+        rgba(0,0,0,.15);
+}
+
+
+.product-form input:focus,
+.product-form select:focus,
+.product-form textarea:focus {
+
+    border-color:
+        #00ffff;
+
+    box-shadow:
+
+        0 0 0 2px
+        rgba(0,255,255,.10),
+
+        0 0 25px
+        rgba(0,255,255,.18),
+
+        inset 0 3px 8px
+        rgba(0,0,0,.25);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.product-form textarea {
+
+    min-height: 150px;
+
+    resize: vertical;
+}
+
+
+/* =========================================
+   SELECT
+========================================= */
+
+.product-form select {
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   FILE INPUT
+========================================= */
+
+.product-form input[type="file"] {
+
+    padding: 12px;
+
+    cursor: pointer;
+
+    background:
+        rgba(0,0,0,.25);
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.product-buttons {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+
+.save-product-btn,
+.cancel-product-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 15px 28px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    border: none;
+}
+
+
+/* SAVE */
+
+.save-product-btn {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+
+    box-shadow:
+
+        0 8px 0 #1645a0,
+
+        0 15px 30px
+        rgba(0,200,255,.25);
+}
+
+
+.save-product-btn:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+
+        0 13px 0 #1645a0,
+
+        0 20px 40px
+        rgba(0,255,255,.30);
+}
+
+
+.save-product-btn:active {
+
+    transform:
+        translateY(3px);
+
+    box-shadow:
+        0 3px 0 #1645a0;
+}
+
+
+/* CANCEL */
+
+.cancel-product-btn {
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+}
+
+
+.cancel-product-btn:hover {
+
+    background:
+        rgba(255,255,255,.18);
+
+    transform:
+        translateY(-4px);
+}
+
+
+/* =========================================
+   RIGHT SIDE - 3D PREVIEW
+========================================= */
+
+.product-preview {
+
+    min-height: 500px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    transform:
+        translateZ(50px);
+}
+
+
+/* GLOW */
+
+.preview-glow {
+
+    position: absolute;
+
+    width: 280px;
+
+    height: 280px;
+
+    border-radius: 50%;
+
+    background:
+        #00ffff;
+
+    filter:
+        blur(100px);
+
+    opacity: .12;
+}
+
+
+/* =========================================
+   3D PRODUCT BOX
+========================================= */
+
+.product-box {
+
+    width: 240px;
+
+    height: 240px;
+
+    border-radius: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #1e40af,
+            #06b6d4
+        );
+
+    box-shadow:
+
+        25px 25px 50px
+        rgba(0,0,0,.35),
+
+        inset 8px 8px 20px
+        rgba(255,255,255,.18),
+
+        inset -8px -8px 20px
+        rgba(0,0,0,.20);
+
+    transform:
+        rotateX(12deg)
+        rotateY(-18deg);
+
+    transition:
+        .5s;
+}
+
+
+.product-box:hover {
+
+    transform:
+        rotateX(0deg)
+        rotateY(0deg)
+        scale(1.05);
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.product-box i {
+
+    font-size: 90px;
+
+    color: white;
+
+    filter:
+        drop-shadow(
+            10px 10px 10px
+            rgba(0,0,0,.3)
+        );
+}
+
+
+/* =========================================
+   PREVIEW TEXT
+========================================= */
+
+.preview-title {
+
+    margin-top: 45px;
+
+    color: #00ffff;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+
+.preview-text {
+
+    margin-top: 8px;
+
+    text-align: center;
+
+    color: #b8c7df;
+
+    max-width: 300px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   ERRORS
+========================================= */
+
+.product-form .errorlist {
+
+    color: #ff7070;
+
+    font-size: 13px;
+
+    margin:
+        5px 0 10px;
+
+    list-style: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:900px) {
+
+    .product-form-card {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .product-preview {
+
+        min-height: 350px;
+
+        order: -1;
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .product-page {
+
+        padding: 30px 15px;
+    }
+
+    .product-form-card {
+
+        padding: 25px;
+
+    }
+
+    .product-title {
+
+        font-size: 35px;
+    }
+
+    .product-buttons {
+
+        flex-direction: column;
+    }
+
+    .save-product-btn,
+    .cancel-product-btn {
+
+        width: 100%;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="product-page">
+
+    <div class="product-form-card">
+
+
+        <!-- =================================
+             FORM SIDE
+        ================================= -->
+
+        <div class="product-form-left">
+
+            <h1 class="product-title">
+
+                {% if title %}
+                    {{ title }}
+                {% else %}
+                    Add Product
+                {% endif %}
+
+            </h1>
+
+
+            <p class="product-subtitle">
+
+                Add a new product to your
+                e-commerce store.
+
+            </p>
+
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="product-form"
+            >
+
+                {% csrf_token %}
+
+
+                {{ form.as_p }}
+
+
+                <div class="product-buttons">
+
+
+                    <button
+                        type="submit"
+                        class="save-product-btn"
+                    >
+
+                        💾 Save Product
+
+                    </button>
+
+
+                    <a
+                        href="{% url 'admin_products' %}"
+                        class="cancel-product-btn"
+                    >
+
+                        ← Cancel
+
+                    </a>
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- =================================
+             3D PREVIEW
+        ================================= -->
+
+        <div class="product-preview">
+
+            <div class="preview-glow"></div>
+
+
+            <div class="product-box">
+
+                <i class="fa-solid fa-box-open"></i>
+
+            </div>
+
+
+            <div class="preview-title">
+
+                Product Preview
+
+            </div>
+
+
+            <p class="preview-text">
+
+                Create your product with
+                price, stock, category,
+                description and image.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="product-details">
+
+    <div class="product-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="product-image">
+
+            <span class="badge">NEW</span>
+
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="product-info">
+
+            <div class="rating">
+
+                ⭐⭐⭐⭐⭐
+
+                <span>(4.9)</span>
+
+            </div>
+
+            <h1>{{ product.name }}</h1>
+
+            <h2 class="price">
+                ₹{{ product.price }}
+            </h2>
+
+            <p class="stock">
+
+                {% if product.stock > 0 %}
+
+                <span class="available">
+                    ✔ In Stock ({{ product.stock }})
+                </span>
+
+                {% else %}
+
+                <span class="out">
+                    ✖ Out of Stock
+                </span>
+
+                {% endif %}
+
+            </p>
+
+            <div class="description">
+
+                <h3>Description</h3>
+
+                <p>{{ product.description }}</p>
+
+            </div>
+
+            <!-- Quantity -->
+
+            <div class="quantity">
+
+                <label>Quantity</label>
+
+                <div class="qty-box">
+
+                    <button>-</button>
+
+                    <input type="text" value="1" readonly>
+
+                    <button>+</button>
+
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="action-buttons">
+
+                <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Add to Cart
+
+                </a>
+
+                <a href="{% url 'checkout' %}" class="buy-btn">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                    Buy Now
+
+                </a>
+
+            </div>
+
+            <!-- Features -->
+
+            <div class="features">
+
+                <div>
+
+                    <i class="fa-solid fa-truck-fast"></i>
+
+                    <span>Fast Delivery</span>
+
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>Secure Payment</span>
+
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    <span>Easy Returns</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

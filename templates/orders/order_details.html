@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/order_details.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+
+    {% for message in messages %}
+
+    <div class="alert {{ message.tags }}">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+
+{% endif %}
+
+<div class="details-page">
+
+    <div class="details-card">
+
+        <div class="page-header">
+            <h1>📦 Order #{{ order.id }}</h1>
+            <span class="status-badge">{{ order.status }}</span>
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-box">
+                <h3><i class="fa-solid fa-calendar-days"></i> Order Date</h3>
+                <p>{{ order.created_at|date:"d M Y, h:i A" }}</p>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fa-solid fa-credit-card"></i> Payment</h3>
+                <p>{{ order.payment_method }}</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h2><i class="fa-solid fa-location-dot"></i> Delivery Address</h2>
+
+        <div class="address-box">
+
+            <h3>{{ order.full_name }}</h3>
+
+            <p>{{ order.phone }}</p>
+
+            <p>{{ order.address }}</p>
+
+            <p>{{ order.city }}, {{ order.state }}</p>
+
+            <p>{{ order.pincode }}</p>
+
+        </div>
+
+        <hr>
+
+        <h2><i class="fa-solid fa-truck-fast"></i> Order Tracking</h2>
+
+        <div class="tracking">
+
+            <div class="step {% if order.status == 'Pending' or order.status == 'Confirmed' or order.status == 'Packed' or order.status == 'Shipped' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}active{% endif %}">
+                ✔ Order Placed
+            </div>
+
+            <div class="step {% if order.status == 'Confirmed' or order.status == 'Packed' or order.status == 'Shipped' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}active{% endif %}">
+                📦 Confirmed
+            </div>
+
+            <div class="step {% if order.status == 'Packed' or order.status == 'Shipped' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}active{% endif %}">
+                📦 Packed
+            </div>
+
+            <div class="step {% if order.status == 'Shipped' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}active{% endif %}">
+                🚚 Shipped
+            </div>
+
+            <div class="step {% if order.status == 'Out for Delivery' or order.status == 'Delivered' %}active{% endif %}">
+                🏠 Out for Delivery
+            </div>
+
+            <div class="step {% if order.status == 'Delivered' %}active{% endif %}">
+                🎉 Delivered
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h2><i class="fa-solid fa-cart-shopping"></i> Ordered Products</h2>
+
+        {% for item in order.items.all %}
+
+        <div class="product-box">
+
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+
+            <div class="product-info">
+
+                <h3>{{ item.product.name }}</h3>
+
+                <p>Quantity : {{ item.quantity }}</p>
+
+                <strong>₹{{ item.price }}</strong>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <hr>
+
+        <div class="total-box">
+
+            <h2>Total Amount</h2>
+
+            <h1>₹{{ order.total_amount }}</h1>
+
+        </div>
+
+        <div class="button-group">
+
+            <a href="{% url 'my_orders' %}" class="back-btn">
+                ← Back to My Orders
+            </a>
+
+
+
+            {% if order.status == "Pending" or order.status == "Confirmed" %}
+
+<a href="{% url 'cancel_order' order.id %}" class="cancel-btn">
+
+    <i class="fa-solid fa-ban"></i>
+
+    Cancel Order
+
+</a>
+
+{% endif %}
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

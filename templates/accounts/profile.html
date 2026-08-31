@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-page">
+
+    <div class="profile-card">
+
+        <div class="profile-left">
+
+            <img src="{{ profile.profile_image.url }}" class="profile-img">
+
+            <h2>{{ request.user.username }}</h2>
+
+            <p>{{ request.user.email }}</p>
+
+            <span class="joined">
+                Joined {{ request.user.date_joined|date:"M Y" }}
+            </span>
+
+        </div>
+
+        <div class="profile-right">
+
+            <h1>
+                <i class="fa-solid fa-user"></i>
+                My Profile
+            </h1>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="save-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Profile
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="stat-box">
+
+            <i class="fa-solid fa-box"></i>
+
+            <h2>{{ total_orders }}</h2>
+
+            <p>Total Orders</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <i class="fa-solid fa-heart"></i>
+
+            <h2>{{ wishlist_count }}</h2>
+
+            <p>Wishlist</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <h2>{{ profile.city }}</h2>
+
+            <p>City</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

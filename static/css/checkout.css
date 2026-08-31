@@ -1,0 +1,473 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#312e81,#0f172a);
+    background-size:400% 400%;
+    animation:bgMove 15s ease infinite;
+    overflow-x:hidden;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Floating Background */
+
+.bg-animation{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.bg-animation span{
+    position:absolute;
+    display:block;
+    border-radius:50%;
+    animation:float 25s linear infinite;
+    opacity:.25;
+    backdrop-filter:blur(20px);
+}
+
+.bg-animation span:nth-child(1){
+    width:300px;
+    height:300px;
+    left:10%;
+    top:15%;
+    background:#38bdf8;
+}
+
+.bg-animation span:nth-child(2){
+    width:250px;
+    height:250px;
+    right:15%;
+    top:60%;
+    background:#8b5cf6;
+}
+
+.bg-animation span:nth-child(3){
+    width:180px;
+    height:180px;
+    left:70%;
+    top:20%;
+    background:#06b6d4;
+}
+
+.bg-animation span:nth-child(4){
+    width:220px;
+    height:220px;
+    left:45%;
+    bottom:5%;
+    background:#2563eb;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-40px) rotate(180deg);
+    }
+
+    100%{
+        transform:translateY(0) rotate(360deg);
+    }
+
+}
+
+/* Page */
+
+.checkout-page{
+
+    width:95%;
+    max-width:1450px;
+    margin:auto;
+    padding:60px 0;
+
+}
+
+.checkout-title{
+
+    text-align:center;
+    margin-bottom:50px;
+    color:#fff;
+
+}
+
+.checkout-title h1{
+
+    font-size:48px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-shadow:0 0 25px #38bdf8;
+
+}
+
+.checkout-title p{
+
+    margin-top:10px;
+    color:#dbeafe;
+    font-size:18px;
+
+}
+
+.checkout-grid{
+
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:35px;
+
+}
+
+/* Glass Card */
+
+.glass-card{
+
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:30px;
+    padding:35px;
+    color:#fff;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
+    transition:.5s;
+
+}
+
+.glass-card:hover{
+
+    transform:
+        perspective(1200px)
+        rotateX(5deg)
+        rotateY(-5deg)
+        translateY(-10px);
+
+    box-shadow:
+        0 40px 80px rgba(0,0,0,.45);
+
+}
+
+.glass-card h2{
+
+    margin-bottom:30px;
+    font-size:30px;
+
+}
+
+.glass-card h2 i{
+
+    color:#38bdf8;
+    margin-right:10px;
+
+}
+
+/* Inputs */
+
+.input-box{
+
+    position:relative;
+    margin-bottom:22px;
+
+}
+
+.input-box i{
+
+    position:absolute;
+    top:50%;
+    left:18px;
+    transform:translateY(-50%);
+    color:#38bdf8;
+    font-size:18px;
+
+}
+
+.input-box input{
+
+    width:100%;
+    padding:18px 20px 18px 52px;
+    border:none;
+    outline:none;
+    border-radius:16px;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    font-size:16px;
+    transition:.4s;
+
+}
+
+.input-box input::placeholder{
+
+    color:#ddd;
+
+}
+
+.input-box input:focus{
+
+    background:rgba(255,255,255,.18);
+    box-shadow:
+        0 0 20px #38bdf8;
+
+}
+
+.row{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+
+}
+
+/* Buttons */
+
+.continue-btn,
+.pay-btn{
+
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:18px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.4s;
+    color:#fff;
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #06b6d4);
+
+}
+
+.continue-btn:hover,
+.pay-btn:hover{
+
+    transform:
+        translateY(-5px)
+        scale(1.02);
+
+    box-shadow:
+        0 20px 40px rgba(37,99,235,.45);
+
+}
+
+/* Summary */
+
+.summary-item{
+
+    display:flex;
+    justify-content:space-between;
+    margin:22px 0;
+    font-size:18px;
+
+}
+
+.summary hr{
+
+    border:none;
+    height:1px;
+    background:rgba(255,255,255,.25);
+    margin:30px 0;
+
+}
+
+.summary-total{
+
+    display:flex;
+    justify-content:space-between;
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:30px;
+
+}
+
+/* Responsive */
+
+@media(max-width:1000px){
+
+.checkout-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.checkout-title h1{
+
+font-size:36px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.row{
+
+grid-template-columns:1fr;
+
+}
+
+.checkout-title h1{
+
+font-size:28px;
+
+}
+
+.glass-card{
+
+padding:25px;
+
+}
+
+}
+/* Product Card */
+
+.product-card{
+
+    display:flex;
+    gap:18px;
+    align-items:center;
+    margin:22px 0;
+    padding:15px;
+    border-radius:18px;
+    background:rgba(255,255,255,.08);
+    transition:.4s;
+
+}
+
+.product-card:hover{
+
+    transform:
+        translateY(-6px)
+        scale(1.02);
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.product-card img{
+
+    width:90px;
+    height:90px;
+    object-fit:cover;
+    border-radius:15px;
+
+}
+
+.product-details{
+
+    flex:1;
+
+}
+
+.product-details h4{
+
+    color:white;
+    margin-bottom:8px;
+
+}
+
+.product-details p{
+
+    color:#dbeafe;
+    margin-bottom:6px;
+
+}
+
+.product-details strong{
+
+    color:#38bdf8;
+    font-size:18px;
+
+}
+/* Address Card */
+
+.address-card{
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.4s;
+
+}
+
+.address-card:hover{
+
+    transform:translateY(-6px);
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.address-card h3{
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+.address-card p{
+
+    color:#dbeafe;
+
+    margin:5px 0;
+
+}
+
+.deliver-btn{
+
+    margin-top:15px;
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.deliver-btn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-3px);
+
+}
+.address-card.selected{
+    border:2px solid #38bdf8;
+    box-shadow:0 0 20px rgba(56,189,248,.5);
+    transform:translateY(-5px);
+}

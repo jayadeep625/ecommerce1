@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<div class="background-grid"></div>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+ <section class="hero">
+
+    <div class="version">
+
+        NEXT GEN SHOPPING EXPERIENCE
+
+    </div>
+
+    <h1>
+
+        SHOP AT THE
+
+        <span>
+
+            SPEED OF FUTURE
+
+        </span>
+
+    </h1>
+
+    <p>
+
+        Experience AI-powered shopping with lightning-fast delivery,
+        personalized recommendations, secure payments, and thousands of
+        premium products.
+
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="{% url 'products' %}" class="btn-primary">
+
+            EXPLORE PRODUCTS
+
+        </a>
+
+        <a href="#" class="btn-secondary">
+
+            VIEW CATEGORIES
+
+        </a>
+
+    </div>
+
+</section>
+
+<script src="{% static 'js/home.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="
+    min-height:70vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px 20px;
+">
+
+    <div style="
+        width:100%;
+        max-width:600px;
+        padding:50px;
+        text-align:center;
+
+        background:rgba(255,255,255,.10);
+
+        border:1px solid rgba(255,255,255,.20);
+
+        border-radius:25px;
+
+        backdrop-filter:blur(20px);
+
+        box-shadow:0 20px 50px rgba(0,0,0,.30);
+    ">
+
+
+        <h1 style="
+            color:#00ffff;
+            margin-bottom:15px;
+        ">
+
+            🔐 Secure Payment
+
+        </h1>
+
+
+        <p style="
+            color:#dbeafe;
+            font-size:18px;
+        ">
+
+            Your order is ready for payment.
+
+        </p>
+
+
+        <div style="
+            margin:30px 0;
+            padding:20px;
+
+            background:rgba(0,0,0,.20);
+
+            border-radius:15px;
+        ">
+
+            <p style="
+                color:#c8d4e8;
+                margin-bottom:5px;
+            ">
+
+                Amount to Pay
+
+            </p>
+
+
+            <h2 style="
+                color:white;
+                font-size:38px;
+            ">
+
+                ₹{{ total }}
+
+            </h2>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="rzp-button"
+            style="
+                width:100%;
+
+                padding:18px;
+
+                border:none;
+
+                border-radius:14px;
+
+                background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+                color:white;
+
+                font-size:20px;
+
+                font-weight:700;
+
+                cursor:pointer;
+            "
+        >
+
+            💳 Pay ₹{{ total }}
+
+        </button>
+
+
+        <p style="
+            color:#9fb3d1;
+            margin-top:20px;
+            font-size:13px;
+        ">
+
+            🔒 Secured by Razorpay
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =================================
+     RAZORPAY CHECKOUT
+================================= -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js">
+</script>
+
+
+<script>
+
+console.log("Razorpay page loaded");
+
+console.log(
+    "Razorpay Order:",
+    "{{ razorpay_order_id }}"
+);
+
+console.log(
+    "Amount:",
+    "{{ amount }}"
+);
+
+
+var options = {
+
+    key: "{{ razorpay_key }}",
+
+    amount: "{{ amount }}",
+
+    currency: "INR",
+
+    name: "E-Commerce",
+
+    description: "E-Commerce Order Payment",
+
+    order_id:
+        "{{ razorpay_order_id }}",
+
+
+    prefill: {
+
+        name:
+            "{{ user_name|escapejs }}",
+
+        email:
+            "{{ user_email|escapejs }}",
+
+        contact:
+            "{{ user_phone|escapejs }}"
+
+    },
+
+
+    theme: {
+
+        color: "#06b6d4"
+
+    },
+
+
+    callback_url:
+        "{% url 'razorpay_callback' %}",
+
+
+    modal: {
+
+        confirm_close: true,
+
+        escape: true,
+
+        backdropclose: false
+
+    }
+
+};
+
+
+var rzp =
+    new Razorpay(options);
+
+
+document
+    .getElementById("rzp-button")
+    .onclick = function(e) {
+
+        e.preventDefault();
+
+        console.log(
+            "Opening Razorpay..."
+        );
+
+        rzp.open();
+
+    };
+
+
+rzp.on(
+    "payment.failed",
+    function(response) {
+
+        console.log(
+            "Payment Failed:",
+            response.error
+        );
+
+        alert(
+            "Payment failed. Please try again."
+        );
+
+    }
+);
+
+</script>
+
+{% endblock %}

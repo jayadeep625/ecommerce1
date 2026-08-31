@@ -1,0 +1,250 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0b1120;
+    color:white;
+    font-family:Arial,sans-serif;
+}
+
+.cart-container{
+
+    width:90%;
+
+    margin:40px auto;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:30px;
+
+}
+
+.cart-card{
+
+    display:flex;
+
+    gap:20px;
+
+    padding:20px;
+
+    margin-bottom:25px;
+
+    background:#1b2435;
+
+    border-radius:15px;
+
+    transition:.3s;
+
+}
+
+.cart-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 0 20px rgba(0,255,255,.4);
+
+}
+
+.image-box{
+
+    width:170px;
+
+    height:170px;
+
+    flex-shrink:0;
+
+}
+
+.image-box img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+}
+
+.details{
+
+    flex:1;
+
+}
+
+.details h2{
+
+    margin-bottom:10px;
+
+}
+
+.details p{
+
+    color:#ccc;
+
+    margin-bottom:15px;
+
+}
+
+.price{
+
+    font-size:28px;
+
+    color:#00ffff;
+
+    margin-bottom:20px;
+
+}
+
+.quantity{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.quantity button{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:#00d9ff;
+
+    font-size:20px;
+
+}
+
+.remove-btn{
+
+    color:#ff5a5a;
+
+    text-decoration:none;
+
+}
+
+.summary-card{
+
+    background:#1b2435;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    position:sticky;
+
+    top:100px;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:20px 0;
+
+}
+
+.checkout-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    margin-top:20px;
+
+    border-radius:10px;
+
+    background:#00d9ff;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.checkout-btn:hover{
+
+    background:#00bfff;
+
+}
+
+.empty-cart{
+
+    text-align:center;
+
+    padding:80px;
+
+}
+
+.shop-btn{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:15px 35px;
+
+    background:#00d9ff;
+
+    color:black;
+
+    text-decoration:none;
+
+    border-radius:10px;
+
+}
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-top:15px;
+}
+
+.qty-btn{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#2874f0;
+    color:#fff;
+    text-decoration:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.qty-btn:hover{
+    background:#0b5ed7;
+    transform:scale(1.1);
+}
+
+.qty-number{
+    font-size:20px;
+    font-weight:bold;
+    min-width:30px;
+    text-align:center;
+}

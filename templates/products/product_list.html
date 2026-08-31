@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+
+<section class="products-hero">
+
+    <div class="hero-content">
+
+        <span class="hero-tag">
+            🔥 PREMIUM COLLECTION
+        </span>
+
+        <h1>Explore Future Shopping</h1>
+
+        <p>
+            Discover premium products with futuristic design, secure shopping,
+            and lightning-fast delivery.
+        </p>
+
+        <a href="#products" class="hero-btn">
+            Shop Now
+        </a>
+
+    </div>
+
+</section>
+
+<!-- Search & Sort -->
+
+<section class="products-section">
+
+    <div class="search-sort">
+
+        <form method="GET">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search Products..."
+                    value="{{ search }}">
+
+            </div>
+
+            <select name="sort">
+
+                <option value="">Sort By</option>
+
+                <option value="low"
+                {% if sort == "low" %}selected{% endif %}>
+                    Price Low → High
+                </option>
+
+                <option value="high"
+                {% if sort == "high" %}selected{% endif %}>
+                    Price High → Low
+                </option>
+
+                <option value="name"
+                {% if sort == "name" %}selected{% endif %}>
+                    A → Z
+                </option>
+
+            </select>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-filter"></i>
+
+                Apply
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Categories -->
+
+    <div class="category-bar">
+
+        <button class="active">All</button>
+
+        <button>💻 Laptops</button>
+
+        <button>📱 Mobiles</button>
+
+        <button>⌚ Watches</button>
+
+        <button>🎧 Audio</button>
+
+        <button>👕 Fashion</button>
+
+    </div>
+
+    <!-- Product Grid -->
+
+    <div class="product-grid" id="products">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <span class="discount-badge">
+
+                NEW
+
+            </span>
+
+            <a href="{% url 'add_to_wishlist' product.id %}" class="wishlist-btn">
+
+    <i class="fa-regular fa-heart"></i>
+
+</a>
+
+                <i class="fa-regular fa-heart"></i>
+
+            </button>
+
+            <div class="image-box">
+
+                <a href="{% url 'product_detail' product.id %}">
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}">
+
+                </a>
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="rating">
+
+                    ⭐⭐⭐⭐⭐
+
+                </div>
+
+                <a
+                    href="{% url 'product_detail' product.id %}"
+                    class="product-title">
+
+                    {{ product.name }}
+
+                </a>
+
+                <p>
+
+                    {{ product.description|truncatewords:15 }}
+
+                </p>
+
+                <div class="price">
+
+                    ₹{{ product.price }}
+
+                </div>
+
+                <div class="buttons">
+
+                    <a
+                        href="{% url 'product_detail' product.id %}"
+                        class="view-btn">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                        View
+
+                    </a>
+
+                    <a
+                        href="{% url 'add_to_cart' product.id %}"
+                        class="cart-btn">
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        Add to Cart
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-products">
+
+            <i class="fa-solid fa-box-open"></i>
+
+            <h2>No Products Available</h2>
+
+            <p>Please add products from the admin panel.</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<script src="{% static 'js/product.js' %}"></script>
+
+{% endblock %}

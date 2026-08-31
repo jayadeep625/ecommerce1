@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+<div class="register-page">
+
+    <div class="register-card">
+
+        <div class="card-header">
+
+            <div class="eyebrow">
+                Join the Marketplace
+            </div>
+
+            <div class="logo-circle">
+                👤
+            </div>
+
+            <h1>Create Account</h1>
+
+            <p>
+                Join thousands of buyers & sellers today
+            </p>
+
+        </div>
+
+        <form method="POST" class="register-form">
+
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            <div class="field-group">
+
+                <label>Username</label>
+
+                <div class="input-wrap">
+
+                    {{ form.username }}
+
+                </div>
+
+                {{ form.username.errors }}
+
+            </div>
+
+            <div class="field-group">
+
+                <label>Email Address</label>
+
+                <div class="input-wrap">
+
+                    {{ form.email }}
+
+                </div>
+
+                {{ form.email.errors }}
+
+            </div>
+
+            <div class="field-group">
+
+                <label>Password</label>
+
+                <div class="input-wrap">
+
+                    {{ form.password1 }}
+
+                </div>
+
+                {{ form.password1.errors }}
+
+            </div>
+
+            <div class="field-group">
+
+                <label>Confirm Password</label>
+
+                <div class="input-wrap">
+
+                    {{ form.password2 }}
+
+                </div>
+
+                {{ form.password2.errors }}
+
+            </div>
+
+            <button type="submit" class="btn-register">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <div class="divider">
+
+            <span>OR</span>
+
+        </div>
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock %}

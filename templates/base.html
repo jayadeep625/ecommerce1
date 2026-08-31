@@ -1,0 +1,220 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>E-Commerce</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+    <!-- Notification CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/notifications.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <a href="{% url 'home' %}">
+            ⚡ E-Commerce
+        </a>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="{% url 'home' %}">
+                HOME
+            </a>
+        </li>
+
+
+        <li>
+            <a href="{% url 'products' %}">
+                PRODUCTS
+            </a>
+        </li>
+
+
+        <li>
+            <a href="#">
+                CATEGORIES
+            </a>
+        </li>
+
+
+        <li>
+            <a href="{% url 'cart' %}">
+                CART
+            </a>
+        </li>
+
+
+        <li>
+            <a href="{% url 'my_orders' %}">
+                MY ORDERS
+            </a>
+        </li>
+
+
+        <!-- NOTIFICATIONS -->
+
+        <li class="notification-nav-item">
+
+            {% include "includes/notifications.html" %}
+
+        </li>
+
+
+        <!-- PROFILE -->
+
+        <li class="profile-menu">
+
+            <a href="#"
+               id="profileBtn">
+
+                <i class="fa-solid fa-circle-user"></i>
+
+                {{ request.user.username }}
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </a>
+
+
+            <div class="dropdown">
+
+                <a href="{% url 'profile' %}">
+                    <i class="fa-solid fa-user"></i>
+                    My Profile
+                </a>
+
+
+                <a href="{% url 'my_orders' %}">
+                    <i class="fa-solid fa-box"></i>
+                    My Orders
+                </a>
+
+
+                <a href="{% url 'wishlist' %}">
+                    <i class="fa-solid fa-heart"></i>
+                    Wishlist
+                </a>
+
+
+                <a href="{% url 'checkout' %}">
+                    <i class="fa-solid fa-location-dot"></i>
+                    My Addresses
+                </a>
+
+
+                <hr>
+
+
+                <a href="{% url 'logout' %}">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+
+            </div>
+
+        </li>
+
+    </ul>
+
+
+    <!-- SHOP NOW -->
+
+    <a href="{% url 'products' %}"
+       class="book-btn">
+
+        SHOP NOW →
+
+    </a>
+
+</header>
+
+
+<!-- MAIN CONTENT -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<!-- PROFILE JAVASCRIPT -->
+
+<script>
+
+const profileMenu =
+    document.querySelector(".profile-menu");
+
+const profileBtn =
+    document.getElementById("profileBtn");
+
+
+if (profileMenu && profileBtn) {
+
+    profileBtn.addEventListener(
+        "click",
+        function(e) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+            profileMenu.classList.toggle("active");
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function() {
+
+            profileMenu.classList.remove("active");
+
+        }
+    );
+
+}
+
+</script>
+
+
+<!-- NOTIFICATION JAVASCRIPT -->
+
+<script src="{% static 'js/notifications.js' %}"></script>
+
+</body>
+
+</html>

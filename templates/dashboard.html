@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="dashboard-header">
+
+        <h1>📊 Admin Dashboard</h1>
+
+        <p>Welcome to your E-Commerce Control Center</p>
+
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-box"></i>
+
+            <h2>{{ total_products }}</h2>
+
+            <p>Total Products</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <h2>{{ total_orders }}</h2>
+
+            <p>Total Orders</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h2>{{ total_users }}</h2>
+
+            <p>Total Users</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+
+            <h2>₹{{ revenue }}</h2>
+
+            <p>Total Revenue</p>
+
+        </div>
+
+    </div>
+
+    <div class="recent-orders">
+
+        <h2>📦 Recent Orders</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Order ID</th>
+
+                    <th>Customer</th>
+
+                    <th>Total</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for order in recent_orders %}
+
+                <tr>
+
+                    <td>#{{ order.id }}</td>
+
+                    <td>{{ order.user.username }}</td>
+
+                    <td>₹{{ order.total_amount }}</td>
+
+                    <td>
+
+                        <span class="status">
+
+                            {{ order.status }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="4">
+
+                        No Orders Yet
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="quick-actions">
+
+        <h2>⚡ Quick Actions</h2>
+
+        <div class="action-grid">
+
+            <a href="/admin/products/product/" class="action-btn">
+
+                ➕ Add Product
+
+            </a>
+
+            <a href="/admin/orders/order/" class="action-btn">
+
+                📦 Manage Orders
+
+            </a>
+
+            <a href="/admin/auth/user/" class="action-btn">
+
+                👥 Manage Users
+
+            </a>
+
+            <a href="/admin/" class="action-btn">
+
+                ⚙ Django Admin
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
